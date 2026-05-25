@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eid Break Assignment — IOTBTECH 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9973A;
+    --gold-light: #F0C96B;
+    --gold-pale: #FDF4E0;
+    --deep: #1A1209;
+    --ink: #2E2010;
+    --cream: #FEFAF2;
+    --warm-mid: #8B6914;
+    --accent-green: #2D6A4F;
+    --accent-teal: #1B5E6C;
+    --light-rule: rgba(201,151,58,0.25);
+    --shadow: 0 4px 32px rgba(26,18,9,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    .no-print { display: none !important; }
+    body { background: white; font-size: 12px; }
+    .hero { page-break-after: always; }
+    .class-block { page-break-inside: avoid; }
+  }
+
+  /* ── DECORATIVE CRESCENT ── */
+  .ornament {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--gold);
+    letter-spacing: 0.5em;
+    margin: 0.5rem 0;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--deep);
+    padding: 60px 40px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(201,151,58,0.35) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 20% 110%, rgba(201,151,58,0.12) 0%, transparent 55%),
+      radial-gradient(ellipse 40% 40% at 80% 110%, rgba(201,151,58,0.12) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(201,151,58,0.18);
+    border: 1px solid rgba(201,151,58,0.4);
+    color: var(--gold-light);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 5px 18px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+  .hero h1 span { color: var(--gold-light); }
+  .hero-sub {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 0.08em;
+    margin-bottom: 32px;
+  }
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .meta-pill {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 10px 20px;
+    color: rgba(255,255,255,0.85);
+    font-size: 0.82rem;
+    font-weight: 500;
+  }
+  .meta-pill strong { color: var(--gold-light); display: block; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 2px; }
+
+  /* ── WRAPPER ── */
+  .wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* ── MOTIVATIONAL BANNER ── */
+  .motivation-block {
+    background: linear-gradient(135deg, var(--gold) 0%, #B87C1A 100%);
+    border-radius: 16px;
+    padding: 32px 36px;
+    color: var(--deep);
+    margin-bottom: 52px;
+    position: relative;
+    overflow: hidden;
+  }
+  .motivation-block::after {
+    content: '✦';
+    position: absolute;
+    right: 28px; top: 20px;
+    font-size: 3.5rem;
+    color: rgba(255,255,255,0.2);
+    font-family: serif;
+  }
+  .motivation-block h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--deep);
+  }
+  .motivation-block p {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    max-width: 680px;
+    color: rgba(26,18,9,0.85);
+  }
+  .motivation-block p strong { color: var(--deep); }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem;
+    font-weight: 900;
+    color: var(--deep);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+  .section-desc {
+    font-size: 0.92rem;
+    color: var(--warm-mid);
+    margin-bottom: 36px;
+    font-style: italic;
+  }
+
+  /* ── CLASS BLOCK ── */
+  .class-block {
+    border: 1px solid var(--light-rule);
+    border-radius: 14px;
+    margin-bottom: 36px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .class-header {
+    background: var(--deep);
+    padding: 18px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .class-num {
+    background: var(--gold);
+    color: var(--deep);
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 4px 12px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+  .class-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+  }
+  .class-body { padding: 24px 28px; background: #fff; }
+
+  /* ── CATEGORY LABEL ── */
+  .cat-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 3px 11px;
+    border-radius: 100px;
+    margin: 18px 0 10px;
+  }
+  .cat-label:first-child { margin-top: 0; }
+  .cat-theory { background: #EAF4FF; color: #1A6EA4; border: 1px solid #B8DCFA; }
+  .cat-product { background: #EBF9F2; color: var(--accent-green); border: 1px solid #A8E6C6; }
+  .cat-engineering { background: #FFF4E5; color: #A05C00; border: 1px solid #FAD29A; }
+  .cat-accessibility { background: #F3EEFF; color: #5B3FA0; border: 1px solid #C9B4F0; }
+  .cat-reflection { background: #FFF0F2; color: #A0203A; border: 1px solid #FABAD0; }
+  .cat-handson { background: #F0FAFA; color: var(--accent-teal); border: 1px solid #A2D9E0; }
+
+  /* ── QUESTIONS ── */
+  ol.questions {
+    list-style: none;
+    counter-reset: qcount;
+    padding: 0;
+  }
+  ol.questions li {
+    counter-increment: qcount;
+    padding: 10px 0 10px 36px;
+    position: relative;
+    border-bottom: 1px solid rgba(201,151,58,0.12);
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+  ol.questions li:last-child { border-bottom: none; }
+  ol.questions li::before {
+    content: counter(qcount);
+    position: absolute;
+    left: 0; top: 12px;
+    background: var(--gold-pale);
+    border: 1.5px solid var(--gold);
+    color: var(--warm-mid);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  ol.questions li strong { color: var(--deep); }
+  ol.questions li code {
+    font-family: 'JetBrains Mono', monospace;
+    background: #F5F0E8;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.82em;
+    color: #7A4F00;
+  }
+
+  /* ── CODE SNIPPET ── */
+  pre.snippet {
+    background: var(--deep);
+    color: #E8D5A0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    padding: 16px 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 10px 0 4px;
+    line-height: 1.6;
+    border: 1px solid rgba(201,151,58,0.2);
+  }
+  pre.snippet .comment { color: #7A8C5A; }
+  pre.snippet .keyword { color: #F0C96B; }
+  pre.snippet .string { color: #A8D5A2; }
+  pre.snippet .num { color: #FDA46A; }
+
+  /* ── PART 2: CODE PORTFOLIO ── */
+  .repo-structure {
+    background: var(--deep);
+    border-radius: 10px;
+    padding: 20px 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: #C8D0A8;
+    line-height: 1.9;
+    border: 1px solid rgba(201,151,58,0.2);
+    margin-bottom: 24px;
+  }
+  .repo-structure .folder { color: var(--gold-light); }
+  .repo-structure .file { color: #A8C8D0; }
+
+  /* ── EXERCISE CARD ── */
+  .exercise-card {
+    border: 1px solid var(--light-rule);
+    border-radius: 12px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .exercise-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    background: var(--gold-pale);
+    border-bottom: 1px solid var(--light-rule);
+  }
+  .exercise-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: var(--gold);
+    color: var(--deep);
+    padding: 2px 10px;
+    border-radius: 4px;
+  }
+  .exercise-header h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--deep);
+  }
+  .exercise-body {
+    padding: 18px 20px;
+    background: #fff;
+    font-size: 0.875rem;
+  }
+  .exercise-body ul {
+    padding-left: 20px;
+  }
+  .exercise-body ul li {
+    padding: 3px 0;
+    color: var(--ink);
+  }
+  .exercise-body ul li::marker { color: var(--gold); }
+
+  /* ── GRADING TABLE ── */
+  table.grading {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    margin: 12px 0;
+  }
+  table.grading th {
+    background: var(--deep);
+    color: var(--gold-light);
+    padding: 10px 16px;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  table.grading td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--light-rule);
+    vertical-align: top;
+    color: var(--ink);
+  }
+  table.grading tr:last-child td { border-bottom: none; }
+  table.grading tr:nth-child(even) td { background: var(--gold-pale); }
+  .weight-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--deep);
+    font-weight: 700;
+    font-size: 0.78rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  /* ── SELF-ASSESSMENT ── */
+  .self-assess {
+    background: var(--deep);
+    border-radius: 14px;
+    padding: 30px 32px;
+    margin: 32px 0;
+  }
+  .self-assess h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold-light);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  .assess-item {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(201,151,58,0.15);
+  }
+  .assess-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .assess-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .assess-lines {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .assess-line {
+    height: 1.5px;
+    background: rgba(201,151,58,0.2);
+    border-radius: 1px;
+  }
+
+  /* ── TIPS ── */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin: 16px 0;
+  }
+  .tip-card {
+    background: #fff;
+    border: 1px solid var(--light-rule);
+    border-radius: 10px;
+    padding: 16px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .tip-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .tip-card p {
+    font-size: 0.855rem;
+    color: var(--ink);
+    line-height: 1.55;
+  }
+  .tip-card strong { color: var(--deep); }
+
+  /* ── FINAL QUOTE ── */
+  .final-quote {
+    text-align: center;
+    padding: 48px 24px;
+    border-top: 2px solid var(--light-rule);
+    margin-top: 56px;
+  }
+  .final-quote blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.45rem;
+    font-style: italic;
+    color: var(--deep);
+    max-width: 600px;
+    margin: 0 auto 16px;
+    line-height: 1.5;
+  }
+  .final-quote blockquote span { color: var(--gold); }
+  .final-quote cite {
+    font-size: 0.82rem;
+    color: var(--warm-mid);
+    font-style: normal;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 48px 0 40px;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--light-rule);
+  }
+  .divider-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.8rem;
+    color: var(--gold);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  /* ── SUBMISSION BOX ── */
+  .submission-box {
+    background: linear-gradient(135deg, #1A1209, #2E2010);
+    border: 1px solid rgba(201,151,58,0.3);
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-bottom: 36px;
+  }
+  .submission-box h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold-light);
+    font-size: 1.15rem;
+    margin-bottom: 16px;
+  }
+  .sub-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .sub-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.5;
+  }
+  .sub-num {
+    background: var(--gold);
+    color: var(--deep);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 0.7rem;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .sub-list li strong { color: var(--gold-light); }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+<div class="hero">
+  <div class="ornament">☽ ✦ ☾</div>
+  <div class="hero-badge">🌙 Eid Mubarak — IOTBTECH 2026</div>
+  <h1>Eid Break <span>Assignment</span></h1>
+  <p class="hero-sub">Classes 1–18 · Comprehensive Reflection + Code Portfolio</p>
+  <div class="hero-meta">
+    <div class="meta-pill"><strong>Due</strong>First Day After Break</div>
+    <div class="meta-pill"><strong>Format</strong>Journal + GitHub Repo + Peer Review</div>
+    <div class="meta-pill"><strong>Total Questions</strong>87 Reflection · 9 Hands-On Exercises</div>
+    <div class="meta-pill"><strong>Submitted to</strong>AlmajiriDev</div>
+  </div>
+  <div class="ornament" style="margin-top:28px">✦ ✦ ✦</div>
+</div>
+
+<!-- ═══════════════════════════════ BODY ═══════════════════════════════ -->
+<div class="wrapper">
+
+  <!-- MOTIVATIONAL OPENER -->
+  <div class="motivation-block">
+    <h2>🌙 Eid Mubarak — Now Get Back to Building.</h2>
+    <p>The break is a gift. Rest, celebrate, and reflect. But remember: every great developer was once exactly where you are — staring at a blank screen, wondering where to start. <strong>This assignment is not a test of what you already know. It is a mirror of how you think.</strong> Answer honestly. Build boldly. Show us the journey, not just the destination. The code you write this break will be code you're proud of.</p>
+  </div>
+
+  <!-- ───────────────────────────── CRITICAL NOTE ───────────────────────────── -->
+  <div style="background:#FFF8E6;border:1.5px solid var(--gold);border-radius:12px;padding:20px 24px;margin-bottom:44px;">
+    <p style="font-size:0.88rem;line-height:1.7;color:var(--ink);">
+      <strong style="color:var(--deep);">⚠️ IMPORTANT:</strong>
+      This assignment has <strong>THREE PARTS</strong> —
+      <strong>(1) Reflection Journal</strong> (written answers),
+      <strong>(2) Code Portfolio</strong> (GitHub repository), and
+      <strong>(3) Peer Review</strong> (review one classmate's work).<br><br>
+      <strong>These questions require YOUR perspective.</strong> "What challenges did you face?" cannot be answered by AI with anything authentic. Answer in your own voice. We will know the difference.
+    </p>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       PART 1: REFLECTION JOURNAL
+  ══════════════════════════════════════════════════════════════ -->
+  <div class="section-title">📓 Part 1 — Reflection Journal</div>
+  <p class="section-desc">Answer every question in your own words. Be honest. Be detailed. Depth matters far more than length.</p>
+
+  <!-- CLASS 1 -->
+  <div class="class-block">
+    <div class="class-header">
+      <span class="class-num">Class 01</span>
+      <h3>The 2026 Web Ecosystem</h3>
+    </div>
+    <div class="class-body">
+      <span class="cat-label cat-theory">📐 Theory — 150+ words each</span>
+      <ol class="questions">
+        <li>Draw (on paper or digitally) how a browser takes your HTML and turns it into what you see on screen. Label: <code>DOM Tree</code>, <code>Render Tree</code>, <code>Layout</code>, <code>Paint</code>. Explain in your own words why understanding this matters for a web developer.</li>
+        <li>HTTP/3 uses QUIC instead of TCP. Explain in simple terms what problem QUIC solves and why it matters for users in 2026.</li>
+        <li>From your own experience as an internet user, identify <strong>ONE website</strong> that does not use semantic HTML properly. What clues tell you this? (e.g., accessibility, screen reader compatibility)</li>
+      </ol>
+      <span class="cat-label cat-product">🧠 Product Thinking</span>
+      <ol class="questions">
+        <li>You're building a blog for a famous chef who wants "more traffic." How does semantic HTML — especially <code>&lt;article&gt;</code>, <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;aside&gt;</code> — help search engines understand and rank their content? Be specific.</li>
+        <li>Edge computing moves processing closer to users. Imagine you're designing a real-time multiplayer game. What edge computing benefits would matter most, and why?</li>
+      </ol>
+      <span class="cat-label cat-engineering">⚙️ Engineering Best Practice</span>
+      <ol class="questions">
+        <li>A junior developer says <em>"I just use divs everywhere, it works fine."</em> Write a 150+ word response explaining why you agree or disagree — touching on: accessibility, SEO, code maintainability, and developer collaboration.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- CLASS 2 -->
+  <div class="class-block">
+    <div class="class-header">
+      <span class="class-num">Class 02</span>
+      <h3>Typography & Information Hierarchy</h3>
+    </div>
+    <div class="class-body">
+      <span class="cat-label cat-theory">📐 Theory</span>
+      <ol class="questions">
+        <li>Explain the difference between <code>&lt;em&gt;</code> and <code>&lt;i&gt;</code>. When would you use each? Provide a real example from your own writing.</li>
+        <li>Screen readers treat certain elements specially. List at least <strong>3 HTML elements</strong> with special screen reader behaviour and explain why the browser handles them that way.</li>
+        <li>ARIA labels can save bad HTML, but they're not a substitute for semantic tags. Give an example of when you'd USE an <code>aria-label</code> — and when you should FIX YOUR HTML instead.</li>
+      </ol>
+      <span class="cat-label cat-accessibility">♿ Accessibility Reflection</span>
+      <ol class="questions">
+        <li>Find a public website (government, bank, or similar) and test its accessibility. Can you tab through the page? Are form labels visible? Do buttons have clear focus states? Document your findings with specific examples.</li>
+      </ol>
+      <span class="cat-label cat-product">🧠 Product Thinking</span>
+      <ol class="questions">
+        <li>You're designing a technical documentation page for an API — users are developers who need to scan quickly. How would you structure the information hierarchy? Describe what your <code>&lt;h1&gt;</code> / <code>&lt;h2&gt;</code> / <code>&lt;h3&gt;</code> hierarchy would look like (describe actual content, not just tags).</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- CLASS 3 -->
+  <div class="class-block">
+    <div class="class-header">
+      <span class="class-num">Class 03</span>
+      <h3>Modern Assets & Linking</h3>
+    </div>
+    <div class="class-body">
+      <span class="cat-label cat-theory">📐 Theory</span>
+      <ol class="questions">
+        <li>A designer gives you a 5 MB PNG for a hero image. Explain step-by-step how you would optimize this for a production website in 2026. Include: formats, tools, and reasoning behind each choice.</li>
+        <li>Explain <code>srcset</code> and when you'd use it. Create a scenario where <code>srcset</code> prevents a problem for mobile users.</li>
+        <li>Why is <code>rel="noopener"</code> important when using <code>target="_blank"</code>? What security vulnerability does it prevent? Explain in terms a non-technical person would understand.</li>
+      </ol>
+      <span class="cat-label cat-engineering">⚙️ Engineering Thinking</span>
+      <ol class="questions">
+        <li>You need to display 50 product images on a page. What's your optimization strategy? Consider: lazy loading, format choice, CDN, and responsive sizing.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- CLASS 4 -->
+  <div class="class-block">
+    <div class="class-header">
+      <span class="class-num">Class 04</span>
+      <h3>Modern Forms & User Experience</h3>
+    </div>
+    <div class="class-body">
+      <span class="cat-label cat-theory">📐 Theory</span>
+      <ol class="questions">
+        <li>A user submits a form with an invalid email. Describe the user experience flow: what happens with client-side-only validation? Server-side-only? Why do you need both?</li>
+        <li>Explain the <code>autocomplete</code> attribute. List <strong>5 different values</strong> and when you'd use each one in a real form.</li>
+      </ol>
+      <span class="cat-label cat-product">🧠 Product Thinking</span>
+      <ol class="questions">
+        <li>You're building a multi-step job application form (5 steps). The user loses internet on step 4. How would you design the form to handle this gracefully? Think about: progress saving, validation strategy, error messaging.</li>
+        <li>When would you use a native <code>&lt;select&gt;</code> versus a custom dropdown? Consider: accessibility, mobile UX, development time, and edge cases.</li>
+      </ol>
+      <span class="cat-label cat-engineering">⚙️ Engineering Best Practice</span>
+      <ol class="questions">
+        <li>Describe (or write) a password input that shows: a strength meter, requirements checklist (8 chars, uppercase, number, symbol), and a show/hide toggle. Focus on accessibility.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- CLASS 5 -->
+  <div class="class-block">
+    <div class="class-header">
+      <span class="class-num">Class 05</span>
+      <h3>The CSS Engine — Box Model & Specificity</h3>
+    </div>
+    <div class="class-body">
+      <span class="cat-label cat-theory">📐 Theory</span>
+      <ol class="questions">
+        <li>Draw a box and label every part: content, padding, border, margin. Then explain: if two adjacent divs have <code>margin-bottom: 20px</code> and <code>margin-top: 30px</code>, how much space is between them, and why?</li>
+        <li>Explain the CSS specificity hierarchy. Which selector wins from these three: <code>.header nav ul li a</code> / <code>nav a.active</code> / <code>.nav-links a</code>? Show your calculation.</li>
+        <li>What is the "cascade" in CSS? Describe a situation where understanding the cascade would save you from writing unnecessary CSS.</li>
+      </ol>
+      <span class="cat-label cat-engineering">⚙️ Engineering Thinking</span>
+      <ol class="questions">
+        <li>You add <code>padding: 10px</code> to an element and it becomes wider than expected. What's happening? What's the fix? Explain using <code>box-sizing</code>.</li>
+        <li>Create a CSS-only visual that shows the difference between <code>content-box</code> and <code>border-box</code>. Use borders and different padding values to make the difference obvious. Add comments explaining your reasoning.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- CLASS 6 -->
+  <div class="class-block">
+    <div class="class-header">
+      <span class="class-num">Class 06</span>
+      <h3>Flexbox Mastery</h3>
+    </div>
+    <div class="class-body">
+      <span class="cat-label cat-theory">📐 Theory</span>
+      <ol class="questions">
+        <li>Explain the difference between <code>flex-grow</code>, <code>flex-shrink</code>, and <code>flex-basis</code>. Use a real-world analogy (no code).</li>
+        <li>When would <code>align-items: stretch</code> not work as expected? Give a specific example with code.</li>
+      </ol>
+      <span class="cat-label cat-engineering">⚙️ Engineering Thinking</span>
+      <ol class="questions">
+        <li>Create a navigation bar with: logo on left, 5 nav items centered, and a "Sign In" button on right — where the nav items stay centered regardless of logo/button width. Show your flexbox solution with explanation.</li>
+        <li>Recreate the Instagram header (Home, Search, Explore, Reels, Messages, Notifications, Create, Profile) using Flexbox. Make it responsive — collapse to hamburger on mobile, show all on desktop. Document your thinking.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- CLASS 7 -->
+  <div class="class-block">
+    <div class="class-header">
+      <span class="class-num">Class 07</span>
+      <h3>CSS Grid & Layout Complexity</h3>
+    </div>
+    <div class="class-body">
+      <span class="cat-label cat-theory">📐 Theory</span>
+      <ol class="questions">
+        <li>When would you choose CSS Grid over Flexbox? Give <strong>3 specific scenarios</strong> where Grid is clearly the better tool.</li>
+        <li>Explain <code>grid-template-areas</code> and when it makes sense to use it over <code>grid-template-columns</code>.</li>
+      </ol>
+      <span class="cat-label cat-engineering">⚙️ Engineering Thinking</span>
+      <ol class="questions">
+        <li>Build a magazine layout: hero article spanning full width, 2 secondary articles side by side, 1 wide article at bottom, then 3 small articles in a row. <strong>Sketch it in ASCII art first</strong>, then show your Grid code. Explain your choice of <code>fr</code> vs <code>auto</code> vs percentages.</li>
+        <li>Build a responsive dashboard layout (sidebar + main content + right panel on large screens; sidebar collapses on mobile). Use only CSS Grid. <strong>No media queries</strong> — use only <code>grid-template-columns</code> with <code>minmax()</code> and <code>auto-fit</code>/<code>auto-fill</code>.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- CLASS 8 -->
+  <div class="class-block">
+    <div class="class-header">
+      <span class="class-num">Class 08</span>
+      <h3>Tailwind CSS Fundamentals</h3>
+    </div>
+    <div class="class-body">
+      <span class="cat-label cat-theory">📐 Theory</span>
+      <ol class="questions">
+        <li>Explain the "utility-first" philosophy. Why does Tailwind's creator choose utility classes over semantic/component-based classes?</li>
+        <li>What is the JIT (Just-In-Time) compiler in Tailwind? How does it affect CSS file size in production?</li>
+      </ol>
+      <span class="cat-label cat-product">🧠 Product Thinking</span>
+      <ol class="questions">
+        <li>Your team switches to Tailwind. A teammate complains it makes HTML "ugly with all those classes." Write a response addressing: readability, maintainability, consistency, and performance.</li>
+      </ol>
+      <span class="cat-label cat-engineering">⚙️ Engineering Thinking</span>
+      <ol class="questions">
+        <li>Build a card component that looks different in 3 contexts: default, hover (slight lift + shadow), and featured (larger, different border colour). Show your Tailwind solution with explanation.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- CLASS 9 -->
+  <div class="class-block">
+    <div class="class-header">
+      <span class="class-num">Class 09</span>
+      <h3>Advanced Tailwind & Responsive Design</h3>
+    </div>
+    <div class="class-body">
+      <span class="cat-label cat-theory">📐 Theory</span>
+      <ol class="questions">
+        <li>Explain Tailwind's breakpoint system. How does the <code>md:</code> prefix work? How would you create a custom breakpoint for <code>1200px</code>?</li>
+        <li>What are arbitrary values in Tailwind (e.g., <code>w-[123px]</code>)? When would you use them versus extending the config?</li>
+      </ol>
+      <span class="cat-label cat-engineering">⚙️ Engineering Best Practice</span>
+      <ol class="questions">
+        <li>You're building a design system. Some colours need to be themeable (light/dark mode). Show how you'd configure Tailwind's dark mode to support both themes while keeping CSS output minimal.</li>
+        <li>Build a responsive landing page for a startup using <strong>only Tailwind</strong> (no custom CSS). Must include: hero section, 3-column feature grid, pricing table (3 tiers), footer. Use at least 3 breakpoints (<code>sm</code>, <code>md</code>, <code>lg</code>). Document your breakpoint strategy.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- CLASS 10 -->
+  <div class="class-block">
+    <div class="class-header">
+      <span class="class-num">Class 10</span>
+      <h3>Memory & Variables</h3>
+    </div>
+    <div class="class-body">
+      <span class="cat-label cat-theory">📐 Theory</span>
+      <ol class="questions">
+        <li>Explain the difference between <code>let</code>, <code>const</code>, and <code>var</code> in terms of: scope, hoisting, and reassignment. Why does <code>const</code> not prevent mutation of objects/arrays?</li>
+        <li>What is the Temporal Dead Zone? Why does it exist? Give an example where TDZ prevents a bug.</li>
+        <li>Draw the memory heap vs stack for this code:
+          <pre class="snippet"><span class="keyword">let</span> name = <span class="string">"Sarah"</span>;
+<span class="keyword">let</span> age = <span class="num">22</span>;
+<span class="keyword">let</span> scores = [<span class="num">90</span>, <span class="num">85</span>, <span class="num">88</span>];
+<span class="keyword">function</span> greet(person) {
+  <span class="keyword">return</span> <span class="string">"Hello, "</span> + person.name;
+}
+<span class="keyword">let</span> result = greet(name);</pre>
+        </li>
+      </ol>
+      <span class="cat-label cat-product">🧠 Product Thinking</span>
+      <ol class="questions">
+        <li>You're building a calculator app. Should you use <code>const</code> or <code>let</code> for: the display value, the operator, the previous operand? Justify each choice.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- CLASS 11 -->
+  <div class="class-block">
+    <div class="class-header">
+      <span class="class-num">Class 11</span>
+      <h3>Control Flow & Comparison</h3>
+    </div>
+    <div class="class-body">
+      <span class="cat-label cat-theory">📐 Theory</span>
+      <ol class="questions">
+        <li>Explain the difference between <code>==</code> and <code>===</code>. When would using <code>==</code> cause a bug? Provide a real example.</li>
+        <li>What is optional chaining (<code>?.</code>)? Show 3 examples where it prevents errors, and one example where it might <em>hide</em> a bug if overused.</li>
+        <li>What is nullish coalescing (<code>??</code>)? How is it different from <code>||</code>? Give an example where <code>??</code> is correct and <code>||</code> would fail.</li>
+      </ol>
+      <span class="cat-label cat-engineering">⚙️ Engineering Thinking</span>
+      <ol class="questions">
+        <li>Validate user input for: name (required), age (number 18-99), email (valid format), preferences (optional object with nested properties). Write validation logic using <code>typeof</code>, optional chaining, and nullish coalescing. Handle each case gracefully.</li>
+        <li>Build a grade calculator that takes multiple test scores, weighted percentages, and a minimum passing grade. Use ternary and logical operators to determine: pass/fail, letter grade, and whether the student qualifies for Distinction (avg ≥ 90). Handle all edge cases.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- CLASS 12 -->
+  <div class="class-block">
+    <div class="class-header">
+      <span class="class-num">Class 12</span>
+      <h3>Functions & Functional Programming</h3>
+    </div>
+    <div class="class-body">
+      <span class="cat-label cat-theory">📐 Theory</span>
+      <ol class="questions">
+        <li>What's the difference between a function declaration and a function expression? Why does hoisting behave differently between them?</li>
+        <li>What is a <strong>pure function</strong>? Why do developers value them? Give an example of a function that is NOT pure and explain why.</li>
+        <li>Explain callbacks and higher-order functions in your own words. Why are they fundamental to JavaScript?</li>
+      </ol>
+      <span class="cat-label cat-product">🧠 Product Thinking</span>
+      <ol class="questions">
+        <li>You're building a math utility library for a calculator app. List at least <strong>5 pure functions</strong> you'd need. For each, describe what it does, its inputs, and output. Explain why making them pure makes your code better.</li>
+      </ol>
+      <span class="cat-label cat-engineering">⚙️ Engineering Thinking</span>
+      <ol class="questions">
+        <li>Create a <code>compose</code> function: <code>compose(f, g, h)(x)</code> returns <code>f(g(h(x)))</code>. Explain your implementation. Then show how <code>reduce</code> could be used instead of a loop.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- CLASS 13 -->
+  <div class="class-block">
+    <div class="class-header">
+      <span class="class-num">Class 13</span>
+      <h3>Data Structures — Arrays & Objects</h3>
+    </div>
+    <div class="class-body">
+      <span class="cat-label cat-theory">📐 Theory</span>
+      <ol class="questions">
+        <li>When would you choose an array over an object for storing data? Give a real example where an object is clearly better.</li>
+        <li>Explain destructuring with nested objects. Show how you'd extract deeply nested values from a complex API response.</li>
+      </ol>
+      <span class="cat-label cat-engineering">⚙️ Engineering Thinking</span>
+      <ol class="questions">
+        <li>Given this orders array, write code to: find all orders by "Alice"; calculate total spent by Alice; get all unique food items (no duplicates); group orders by status.
+          <pre class="snippet"><span class="keyword">const</span> orders = [
+  { id: <span class="num">1</span>, customer: <span class="string">"Alice"</span>, items: [<span class="string">"Pizza"</span>, <span class="string">"Salad"</span>], total: <span class="num">45.00</span>, status: <span class="string">"delivered"</span> },
+  { id: <span class="num">2</span>, customer: <span class="string">"Bob"</span>,   items: [<span class="string">"Burger"</span>],            total: <span class="num">15.00</span>, status: <span class="string">"pending"</span>   },
+  { id: <span class="num">3</span>, customer: <span class="string">"Alice"</span>, items: [<span class="string">"Burger"</span>, <span class="string">"Fries"</span>],  total: <span class="num">20.00</span>, status: <span class="string">"delivered"</span> }
+];</pre>
+        </li>
+        <li>Build a product search/filter feature. Given an array of 20 products (invent your own), implement: search by name (case-insensitive), filter by price range, filter by category, sort by price (asc/desc), and combine multiple filters. Use <code>map</code>, <code>filter</code>, <code>reduce</code>, and <code>sort</code>.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- CLASS 14 -->
+  <div class="class-block">
+    <div class="class-header">
+      <span class="class-num">Class 14</span>
+      <h3>DOM Manipulation & Events</h3>
+    </div>
+    <div class="class-body">
+      <span class="cat-label cat-theory">📐 Theory</span>
+      <ol class="questions">
+        <li>Explain the difference between event bubbling and event capturing. When would you choose one over the other?</li>
+        <li>What is event delegation? Show a scenario where event delegation is clearly better than attaching listeners to each child element.</li>
+        <li>When creating elements dynamically, what's the security concern with <code>innerHTML</code> versus <code>createElement</code>/<code>textContent</code>?</li>
+      </ol>
+      <span class="cat-label cat-engineering">⚙️ Engineering Thinking</span>
+      <ol class="questions">
+        <li>Build a todo list: input + "Add" button, display todos in a list, each todo has "Edit" and "Delete" buttons, todos persist in localStorage. Handle: empty input, XSS injection attempts, and very long text.</li>
+      </ol>
+      <span class="cat-label cat-product">🧠 Product Thinking</span>
+      <ol class="questions">
+        <li>You're adding real-time collaboration to a todo app (multiple users see changes instantly). What DOM updates would need to happen? How would you handle conflicting edits (User A deletes an item while User B is editing it)?</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- CLASS 15 -->
+  <div class="class-block">
+    <div class="class-header">
+      <span class="class-num">Class 15</span>
+      <h3>Personal Dashboard Project</h3>
+    </div>
+    <div class="class-body">
+      <span class="cat-label cat-reflection">💬 Personal Reflection</span>
+      <ol class="questions">
+        <li>This was your first mini-project. What was the hardest part? What did you learn about your own debugging process?</li>
+        <li>When you got stuck, how did you get unstuck? Did you use documentation, Google, AI, or peer help? What worked best for you, and why?</li>
+        <li>How would you rate your code organisation in this project? What would you do differently if you started over?</li>
+        <li>Where did you implement localStorage? Why there? What other data persistence options could you have used?</li>
+      </ol>
+      <span class="cat-label cat-engineering">⚙️ Engineering Best Practice</span>
+      <ol class="questions">
+        <li>Review your project code. Identify <strong>3 things you did well</strong> and <strong>3 things you'd improve</strong>. Be specific — not "could be cleaner" but actual code locations and what you'd change.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- CLASS 16 -->
+  <div class="class-block">
+    <div class="class-header">
+      <span class="class-num">Class 16</span>
+      <h3>The Event Loop & Promises</h3>
+    </div>
+    <div class="class-body">
+      <span class="cat-label cat-theory">📐 Theory</span>
+      <ol class="questions">
+        <li>Explain the JavaScript event loop in your own words. Include: call stack, task queue, microtask queue. Why does this matter for async code?</li>
+        <li>What's the difference between microtasks and macrotasks? Give examples of each. Why does <code>Promise.resolve().then()</code> run before <code>setTimeout</code>?</li>
+        <li>Draw a timeline showing what gets logged first, second, third, fourth from this code:
+          <pre class="snippet">console.log(<span class="string">'1'</span>);
+setTimeout(() =&gt; console.log(<span class="string">'2'</span>), <span class="num">0</span>);
+Promise.resolve().then(() =&gt; console.log(<span class="string">'3'</span>));
+console.log(<span class="string">'4'</span>);
+<span class="comment">// What gets logged and in what order? Explain WHY.</span></pre>
+        </li>
+      </ol>
+      <span class="cat-label cat-engineering">⚙️ Engineering Thinking</span>
+      <ol class="questions">
+        <li>You have 3 async operations. B depends on A's result. C can run in parallel with B, but its result is only needed if B succeeds. Show how you'd structure this with Promises.</li>
+        <li>Create a simulated "Pizza Delivery" tracker using Promises: Order placed (200ms) → Prepared (800ms) → Baked (1500ms) → Out for delivery (1000ms) → Delivered. Allow cancellation at any point before delivery. Handle errors like "kitchen fire."</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- CLASS 17 -->
+  <div class="class-block">
+    <div class="class-header">
+      <span class="class-num">Class 17</span>
+      <h3>Async/Await & Fetch API</h3>
+    </div>
+    <div class="class-body">
+      <span class="cat-label cat-theory">📐 Theory</span>
+      <ol class="questions">
+        <li>What is <code>async/await</code>? How does it make asynchronous code easier to read compared to <code>.then()</code> chains?</li>
+        <li>When would you use <code>try/catch</code> with async/await? What happens if you don't use it and there's an error?</li>
+      </ol>
+      <span class="cat-label cat-product">🧠 Product Thinking</span>
+      <ol class="questions">
+        <li>You're building a crypto price tracker with a rate-limited API. Design a strategy to: cache results for 30 seconds, show "loading" state while fetching, handle API errors gracefully, and handle "no internet" scenarios.</li>
+      </ol>
+      <span class="cat-label cat-engineering">⚙️ Engineering Thinking</span>
+      <ol class="questions">
+        <li>Build a fetch wrapper function that: auto-adds headers (Content-Type, Authorization from localStorage), handles 401 errors (redirect to login), handles 429 rate limits (retry after delay), normalises error messages, and returns parsed JSON or throws descriptive errors.</li>
+        <li>Using the OMDB API (or any movie API), build a movie search app: search input, debounce (wait 500ms after typing stops), loading state, results with poster/title/year, "no results found" state, API error handling, and pagination.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- CLASS 18 -->
+  <div class="class-block">
+    <div class="class-header">
+      <span class="class-num">Class 18</span>
+      <h3>Intermediate Project — Movie Finder</h3>
+    </div>
+    <div class="class-body">
+      <span class="cat-label cat-reflection">💬 Personal Reflection</span>
+      <ol class="questions">
+        <li>Compare this project to Class 15. What did you do better this time? What's still hard?</li>
+        <li>How did you handle the API integration? Walk through your code structure. Why did you organise it that way?</li>
+        <li>What was your debugging strategy when the API didn't work or data wasn't displaying correctly?</li>
+        <li>Rate yourself on: error handling, code organisation, user experience, and API handling. For each, explain one specific thing to improve.</li>
+      </ol>
+      <span class="cat-label cat-product">🧠 Product Thinking</span>
+      <ol class="questions">
+        <li>Your Movie Finder works but users are dropping off: 40% leave on the search page, 30% on results, 30% after clicking a movie. Design specific improvements to address each drop-off point.</li>
+        <li>If you were to add a "Watchlist" feature, how would you design the data model? What would you store? How would you handle localStorage limits?</li>
+      </ol>
+      <span class="cat-label cat-engineering">⚙️ Engineering Best Practice</span>
+      <ol class="questions">
+        <li>Review your Movie Finder code. List: 3 best practices you followed, 3 anti-patterns you may have used, and 3 things you learned that you didn't know at the start.</li>
+        <li><strong>Peer Review:</strong> Find a classmate's project (or your own if unavailable). Write a code review covering: structure, readability, error handling, and at least one constructive suggestion for improvement. Be constructive, not critical.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       PART 2: CODE PORTFOLIO
+  ══════════════════════════════════════════════════════════════ -->
+  <div class="divider"><span class="divider-text">Part Two</span></div>
+
+  <div class="section-title">💻 Part 2 — Code Portfolio</div>
+  <p class="section-desc">Create a GitHub repository. Commit daily. Working code only — no placeholder comments.</p>
+
+  <!-- Repo structure -->
+  <div class="repo-structure">
+    <div><span class="folder">📁 break-exercises/</span></div>
+    <div>&nbsp;&nbsp;<span class="folder">📁 class-10-11-functions/</span>&nbsp;&nbsp;<span class="file">README.md</span></div>
+    <div>&nbsp;&nbsp;<span class="folder">📁 class-12-hof-callbacks/</span>&nbsp;&nbsp;<span class="file">README.md</span></div>
+    <div>&nbsp;&nbsp;<span class="folder">📁 class-13-data-structures/</span>&nbsp;&nbsp;<span class="file">README.md</span></div>
+    <div>&nbsp;&nbsp;<span class="folder">📁 class-14-dom-events/</span>&nbsp;&nbsp;<span class="file">README.md</span></div>
+    <div>&nbsp;&nbsp;<span class="folder">📁 class-15-dashboard/</span>&nbsp;&nbsp;<span class="file">README.md</span></div>
+    <div>&nbsp;&nbsp;<span class="folder">📁 class-16-promises/</span>&nbsp;&nbsp;<span class="file">README.md</span></div>
+    <div>&nbsp;&nbsp;<span class="folder">📁 class-17-18-movie-finder/</span>&nbsp;&nbsp;<span class="file">README.md</span></div>
+    <div>&nbsp;&nbsp;<span class="file">README.md</span>&nbsp;&nbsp;<span style="color:#7A8C5A;">← main repo README (required)</span></div>
+  </div>
+
+  <!-- EXERCISE SET A -->
+  <h3 style="font-family:'Playfair Display',serif;color:var(--deep);font-size:1.15rem;margin:28px 0 16px;">Set A — Functions & Logic <span style="font-size:0.75rem;font-weight:400;color:var(--warm-mid);font-family:'DM Sans',sans-serif;">(Classes 10–12)</span></h3>
+
+  <div class="exercise-card">
+    <div class="exercise-header">
+      <span class="exercise-tag">A1</span>
+      <h4>Build a Calculator</h4>
+    </div>
+    <div class="exercise-body">
+      <ul>
+        <li>Basic operations: add, subtract, multiply, divide</li>
+        <li>Scientific operations: square root, power, factorial</li>
+        <li>All operations must be <strong>pure functions</strong> — no global state</li>
+        <li>Use higher-order functions for operation selection</li>
+        <li>Include error handling: divide by zero, square root of negative</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exercise-card">
+    <div class="exercise-header">
+      <span class="exercise-tag">A2</span>
+      <h4>Build a Validation Library</h4>
+    </div>
+    <div class="exercise-body">
+      <p style="margin-bottom:10px;">Create validators for: email, phone number (multiple formats), strong password, URL, and date (YYYY-MM-DD). Each must return:</p>
+      <pre class="snippet">{ valid: <span class="keyword">boolean</span>, error: <span class="keyword">string</span> | <span class="keyword">null</span> }</pre>
+    </div>
+  </div>
+
+  <div class="exercise-card">
+    <div class="exercise-header">
+      <span class="exercise-tag">A3</span>
+      <h4>Build an Array Utility Library</h4>
+    </div>
+    <div class="exercise-body">
+      <p style="margin-bottom:10px;">Implement these <strong>without using built-in equivalents</strong>:</p>
+      <ul>
+        <li><code>myMap(array, callback)</code> — custom map</li>
+        <li><code>myFilter(array, callback)</code> — custom filter</li>
+        <li><code>myReduce(array, callback, initial)</code> — custom reduce</li>
+        <li><code>myFlat(array, depth)</code> — flatten nested arrays</li>
+        <li><code>myDebounce(fn, delay)</code> — debounce function</li>
+        <li><code>myThrottle(fn, limit)</code> — throttle function</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- EXERCISE SET B -->
+  <h3 style="font-family:'Playfair Display',serif;color:var(--deep);font-size:1.15rem;margin:28px 0 16px;">Set B — DOM & Events <span style="font-size:0.75rem;font-weight:400;color:var(--warm-mid);font-family:'DM Sans',sans-serif;">(Classes 13–14)</span></h3>
+
+  <div class="exercise-card">
+    <div class="exercise-header">
+      <span class="exercise-tag">B1</span>
+      <h4>Build an Interactive Quiz</h4>
+    </div>
+    <div class="exercise-body">
+      <ul>
+        <li>10 questions of your choice (JS trivia, general knowledge, etc.)</li>
+        <li>Progress bar and score tracking</li>
+        <li>Result page with correct/incorrect review</li>
+        <li>Persist best score in localStorage</li>
+        <li><em>Optional challenge:</em> Add a countdown timer per question</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exercise-card">
+    <div class="exercise-header">
+      <span class="exercise-tag">B2</span>
+      <h4>Build a Drag-and-Drop Kanban Board</h4>
+    </div>
+    <div class="exercise-body">
+      <ul>
+        <li>3 columns: To Do, In Progress, Done</li>
+        <li>Cards can be dragged between columns</li>
+        <li>Cards have: title, description, priority (low/medium/high), due date</li>
+        <li>Add, edit, and delete cards</li>
+        <li>Cards persist in localStorage; visual feedback during drag</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exercise-card">
+    <div class="exercise-header">
+      <span class="exercise-tag">B3</span>
+      <h4>Build a Dynamic Table</h4>
+    </div>
+    <div class="exercise-body">
+      <ul>
+        <li>Display your own dataset (products, students, employees, etc.)</li>
+        <li>Sort by any column (click the header)</li>
+        <li>Filter by search input</li>
+        <li>Pagination — 10 items per page</li>
+        <li>Edit rows inline — no page reloads</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- EXERCISE SET C -->
+  <h3 style="font-family:'Playfair Display',serif;color:var(--deep);font-size:1.15rem;margin:28px 0 16px;">Set C — Async & API <span style="font-size:0.75rem;font-weight:400;color:var(--warm-mid);font-family:'DM Sans',sans-serif;">(Classes 15–18)</span></h3>
+
+  <div class="exercise-card">
+    <div class="exercise-header">
+      <span class="exercise-tag">C1</span>
+      <h4>Personal Dashboard Enhancement</h4>
+    </div>
+    <div class="exercise-body">
+      <p style="margin-bottom:10px;">Take your Class 15 dashboard and add:</p>
+      <ul>
+        <li>Weather widget (e.g., OpenWeatherMap free API)</li>
+        <li>Random quote (free quote API)</li>
+        <li>To-do list with drag-and-drop reordering</li>
+        <li>localStorage persistence for all widgets</li>
+        <li>At least 3 animations/transitions</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exercise-card">
+    <div class="exercise-header">
+      <span class="exercise-tag">C2</span>
+      <h4>Promise Chain Debugger</h4>
+    </div>
+    <div class="exercise-body">
+      <p>Write a complex async operation and add logging at each step. Comment your code explaining: what's on the call stack at each point, what's in the microtask queue, and when each Promise resolves.</p>
+    </div>
+  </div>
+
+  <div class="exercise-card">
+    <div class="exercise-header">
+      <span class="exercise-tag">C3</span>
+      <h4>Movie Finder — Full Project</h4>
+    </div>
+    <div class="exercise-body">
+      <ul>
+        <li>Search with debounce (500ms)</li>
+        <li>Results display: poster, title, year, IMDb rating</li>
+        <li>Movie detail view: plot, actors, director, genre</li>
+        <li>Error handling: API errors, no results, rate limits</li>
+        <li>Loading states and pagination</li>
+        <li>Favourites feature (localStorage)</li>
+        <li>Fully responsive design</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       PART 3: SUBMISSION & SELF-ASSESSMENT
+  ══════════════════════════════════════════════════════════════ -->
+  <div class="divider"><span class="divider-text">Part Three</span></div>
+
+  <div class="section-title">📋 Part 3 — Submission & Self-Assessment</div>
+  <p class="section-desc">What you submit tells us more than any grade ever could.</p>
+
+  <div class="submission-box">
+    <h3>📬 Submission Checklist</h3>
+    <ul class="sub-list">
+      <li><span class="sub-num">1</span><div><strong>Reflection Journal</strong> — A single Markdown file (.md) with all written answers. Use clear headers for each class. Write in your own voice.</div></li>
+      <li><span class="sub-num">2</span><div><strong>Code Portfolio</strong> — GitHub repository with all exercise folders. Each folder must have working code + README.md. Clear commit history (not one big commit).</div></li>
+      <li><span class="sub-num">3</span><div><strong>Self-Assessment</strong> — Completed template (see below) appended at the end of your journal.</div></li>
+    </ul>
+  </div>
+
+  <!-- Self-Assessment Template -->
+  <div class="self-assess">
+    <h3>📝 Self-Assessment Template</h3>
+    <p style="font-size:0.82rem;color:rgba(255,255,255,0.55);margin-bottom:20px;">Copy this template to the end of your Reflection Journal and fill it in honestly.</p>
+    <div class="assess-item">
+      <div class="assess-label">Before this break, I knew…</div>
+      <p style="font-size:0.82rem;color:rgba(255,255,255,0.5);margin-bottom:8px;">(List 3 things)</p>
+      <div class="assess-lines"><div class="assess-line"></div><div class="assess-line"></div><div class="assess-line"></div></div>
+    </div>
+    <div class="assess-item">
+      <div class="assess-label">During this break, I learned…</div>
+      <p style="font-size:0.82rem;color:rgba(255,255,255,0.5);margin-bottom:8px;">(List 3 things)</p>
+      <div class="assess-lines"><div class="assess-line"></div><div class="assess-line"></div><div class="assess-line"></div></div>
+    </div>
+    <div class="assess-item">
+      <div class="assess-label">I'm still confused about…</div>
+      <p style="font-size:0.82rem;color:rgba(255,255,255,0.5);margin-bottom:8px;">(2 things — be honest)</p>
+      <div class="assess-lines"><div class="assess-line"></div><div class="assess-line"></div></div>
+    </div>
+    <div class="assess-item">
+      <div class="assess-label">My growth areas…</div>
+      <p style="font-size:0.82rem;color:rgba(255,255,255,0.5);margin-bottom:8px;">(3 specific things)</p>
+      <div class="assess-lines"><div class="assess-line"></div><div class="assess-line"></div><div class="assess-line"></div></div>
+    </div>
+    <div class="assess-item">
+      <div class="assess-label">One thing I'll do differently in the next project…</div>
+      <p style="font-size:0.82rem;color:rgba(255,255,255,0.5);margin-bottom:8px;">(1 specific thing)</p>
+      <div class="assess-lines"><div class="assess-line"></div></div>
+    </div>
+  </div>
+
+  <!-- Grading Criteria -->
+  <h3 style="font-family:'Playfair Display',serif;color:var(--deep);font-size:1.1rem;margin:32px 0 12px;">🎯 Grading Criteria</h3>
+  <table class="grading">
+    <tr>
+      <th>Category</th>
+      <th>Weight</th>
+      <th>What We're Looking For</th>
+    </tr>
+    <tr>
+      <td><strong>Reflection Depth</strong></td>
+      <td><span class="weight-badge">25%</span></td>
+      <td>Answers that show genuine thought, not just definitions.</td>
+    </tr>
+    <tr>
+      <td><strong>Code Functionality</strong></td>
+      <td><span class="weight-badge">30%</span></td>
+      <td>Projects that actually work — no crashes on basic interactions.</td>
+    </tr>
+    <tr>
+      <td><strong>Code Quality</strong></td>
+      <td><span class="weight-badge">20%</span></td>
+      <td>Clean structure, good naming conventions, error handling.</td>
+    </tr>
+    <tr>
+      <td><strong>Best Practices</strong></td>
+      <td><span class="weight-badge">15%</span></td>
+      <td>Semantic HTML, accessibility, image optimisation, and security.</td>
+    </tr>
+    <tr>
+      <td><strong>Personal Growth</strong></td>
+      <td><span class="weight-badge">10%</span></td>
+      <td>Honest, realistic self-assessment and clearly articulated goals.</td>
+    </tr>
+  </table>
+
+  <!-- Tips for Success -->
+  <div class="divider"><span class="divider-text">Tips for Success</span></div>
+  <div class="tips-grid">
+    <div class="tip-card"><span class="tip-icon">🚫</span><p><strong>Don't use AI for reflection questions.</strong> We can tell. Answer from your own experience and in your own voice.</p></div>
+    <div class="tip-card"><span class="tip-icon">📅</span><p><strong>Commit code daily.</strong> Don't wait until the last day. Your commit history is part of your grade.</p></div>
+    <div class="tip-card"><span class="tip-icon">🧩</span><p><strong>Break problems down.</strong> If something feels overwhelming, split it into the smallest possible piece and solve that first.</p></div>
+    <div class="tip-card"><span class="tip-icon">🤝</span><p><strong>Ask for help early.</strong> Post in the group chat when you're stuck. And help others — explaining code is the fastest way to understand it.</p></div>
+    <div class="tip-card"><span class="tip-icon">🔍</span><p><strong>Read error messages.</strong> They usually tell you exactly what's wrong and on which line. Don't skip past them.</p></div>
+    <div class="tip-card"><span class="tip-icon">🪲</span><p><strong>Use <code>console.log</code> strategically.</strong> It's your best debugging tool. Log early, log often, log meaningfully.</p></div>
+    <div class="tip-card"><span class="tip-icon">🧪</span><p><strong>Test as you build.</strong> Don't write 500 lines then test. Check every 10–20 lines. Small loops catch small bugs.</p></div>
+  </div>
+
+  <!-- Final Quote -->
+  <div class="final-quote">
+    <div class="ornament">☽ ✦ ☾</div>
+    <blockquote>
+      "The goal is <span>growth</span>, not perfection.<br>Make mistakes. Learn from them.<br>Show us the journey."
+    </blockquote>
+    <cite>— AlmajiriDev · IOTBTECH 2026</cite>
+  </div>
+
+</div><!-- end wrapper -->
+</body>
+</html>
